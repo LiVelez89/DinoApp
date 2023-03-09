@@ -1,0 +1,2 @@
+# DinoApp
+For dinosaur lovers 🦕
