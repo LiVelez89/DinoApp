@@ -20,6 +20,7 @@ enum APIError: Error {
 }
 
 struct NetworkManager {
+   
     func makeRequest<T: Decodable>(type: T.Type, completion: @escaping (Result<T, APIError>) -> Void) {
      
         guard let url = URL(string: Constants.baseURL) else {

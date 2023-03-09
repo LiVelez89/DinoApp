@@ -17,10 +17,25 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .red
+        viewModel.getDino()
+        setUpTableView()
 
     }
-
+    func setUpTableView() {
+        tableView.dataSource = self
+        tableView.register(DinoTableViewCell.self, forCellReuseIdentifier: DinoTableViewCell.reuseID)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(tableView)
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
 }
 
 // MARK: - TableView DataSource
@@ -28,13 +43,12 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-     //   viewModel.dino.count  dino is a property of the cell that is equal to dinoModel
-        return 4
+        return viewModel.dino.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-    
+        viewModel.buildTableCell(with: viewModel.dino[indexPath.row])
     }
     
     
